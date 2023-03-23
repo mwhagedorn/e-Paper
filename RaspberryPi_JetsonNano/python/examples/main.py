@@ -1,5 +1,11 @@
 ##!/usr/bin/python
 # -*- coding:utf-8 -*-
+
+picdir = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), 'pic')
+libdir = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), 'lib')
+if os.path.exists(libdir):
+    sys.path.append(libdir)
+    
 import sys
 import os
 import logging
@@ -14,10 +20,7 @@ from functools import reduce
 import re
 import datetime
 
-picdir = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), 'pic')
-libdir = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), 'lib')
-if os.path.exists(libdir):
-    sys.path.append(libdir)
+
 
 # Log to output file to see what's going on
 logging.basicConfig(level=logging.INFO,
