@@ -76,8 +76,8 @@ def make_it_pretty(quotes, spacing, screen_height, screen_width, padding):
             font = ImageFont.truetype(os.path.join(picdir, 'FontsFree-Net-Bookerly.ttf'), size)
             line_height = font.getsize('hg')[1] + spacing
             max_lines = (screen_height // line_height)
-            splitted_quote = text.split("\n")
-            result = [text_wrap(part, font=font, max_width=screen_width - (padding * 2)) for part in splitted_quote]
+            split_quote = text.split("\n")
+            result = [text_wrap(part, font=font, max_width=screen_width - (padding * 2)) for part in split_quote]
             blocks = reduce(lambda x, y: x + y, result)
             trimmed_blocks = [x.strip() for x in blocks]
             r = re.compile("[\w\"]+")
@@ -162,6 +162,12 @@ def get_affirmations():
         "Gratitude and complaining cannot coexist simultaneously, so I choose the one that best serves me.",
         "I have the ability to be at peace, even when life is difficult or painful.",
         "Anything another person has overcome or accomplished is evidence of what's possible for me.",
+        "I am committed to maintaining unwavering faith that I will reach my goal and putting forth extraordinary effort until I do, no matter what.\nThere is no other option.",
+        "I will accomplish everything that needs to get done.",
+        "I am going to make you so proud.",
+        "Every day I am better than before."
+
+
 
     ]
     return affirmations
