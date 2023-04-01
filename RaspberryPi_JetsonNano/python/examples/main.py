@@ -8,7 +8,6 @@ libdir = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__)
 if os.path.exists(libdir):
     sys.path.append(libdir)
 
-
 import logging
 from waveshare_epd import epd4in2 as epd_driver
 import time
@@ -20,8 +19,6 @@ import random
 from functools import reduce
 import re
 import datetime
-
-
 
 # Log to output file to see what's going on
 logging.basicConfig(level=logging.INFO,
@@ -162,12 +159,14 @@ def get_affirmations():
         "Gratitude and complaining cannot coexist simultaneously, so I choose the one that best serves me.",
         "I have the ability to be at peace, even when life is difficult or painful.",
         "Anything another person has overcome or accomplished is evidence of what's possible for me.",
-        "I am committed to maintaining unwavering faith that I will reach my goal and putting forth extraordinary effort until I do, no matter what.\nThere is no other option.",
+        "I am committed to maintaining unwavering faith that I will reach my goal and putting forth extraordinary"
+        "effort until I do, no matter what.\nThere is no other option.",
         "I will accomplish everything that needs to get done.",
         "I am going to make you so proud.",
-        "Every day I am better than before."
-
-
+        "Every day I am better than before.",
+        "No matter how I started I am going to finish the week strong.",
+        "I embrace critical feedback as a learning opportunity.",
+        "I embrace the learning opportunities in every challenge",
 
     ]
     return affirmations
