@@ -167,7 +167,11 @@ def get_affirmations():
         "No matter how I started I am going to finish the week strong.",
         "I embrace critical feedback as a learning opportunity.",
         "I embrace the learning opportunities in every challenge",
-        "I am a confident champion, fully equipped to handle the challenges place before me.\nI will succeed."
+        "I am a confident champion, fully equipped to handle the challenges place before me.\nI will succeed.",
+        "Win or learn.",
+        "You are loved for who you are, just for existing",
+        "You must do the things you think you cannot do"
+
 
     ]
     return affirmations
