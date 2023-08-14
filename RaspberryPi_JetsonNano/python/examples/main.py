@@ -170,7 +170,13 @@ def get_affirmations():
         "I am a confident champion, fully equipped to handle the challenges place before me.\nI will succeed.",
         "Win or learn.",
         "You are loved for who you are, just for existing",
-        "You must do the things you think you cannot do"
+        "You must do the things you think you cannot do",
+        "You are confident in your ability",
+        "You have the skills you need to win",
+        "You are mentally strong",
+        "I am prepared to win",
+        "I am focused on sucess",
+        "I am successful"
 
 
     ]
