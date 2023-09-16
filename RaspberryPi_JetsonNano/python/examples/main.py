@@ -175,7 +175,7 @@ def get_affirmations():
         "You have the skills you need to win",
         "You are mentally strong",
         "I am prepared to win",
-        "I am focused on sucess",
+        "I am focused on success",
         "I am successful"
 
 
