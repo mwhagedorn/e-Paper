@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" serverName="affirm2" remoteFilesAllowedToDisappearOnAutoupload="false" confirmBeforeUploading="false">
+    <option name="confirmBeforeUploading" value="false" />
+    <serverData>
+      <paths name="affirm2">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/RaspberryPi_JetsonNano/python" local="$PROJECT_DIR$/RaspberryPi_JetsonNano/python" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+    </serverData>
+  </component>
+</project>

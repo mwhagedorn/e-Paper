@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="3189055d-c257-4aa7-8f59-4911082f29e0" name="affirm2">
+        <fileTransfer rootFolder="/home/mwhagedorn/e-Paper" accessType="SFTP" host="affirm2.local" port="22" sshConfigId="786b4393-7f05-4d3a-9df5-25247a90dc78" sshConfig="mwhagedorn@affirm2.local:22 key" keyPair="true">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" isUseRsync="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

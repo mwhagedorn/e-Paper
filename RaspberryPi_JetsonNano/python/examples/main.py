@@ -57,7 +57,8 @@ def slice_index(x):
 
 def upperfirst(x):
     i = slice_index(x)
-    return x[:i].upper() + x[i:]
+    return
+
 
 
 # Calculates font-size, line-wrapping, vertical centering, # of lines, strips not-needed parts AND does your dishes
@@ -115,7 +116,7 @@ def resize(image, width, height):
 def get_affirmations():
     logging.info("Fetching affirmations..")
     affirmations = [
-        "I am committed to doing my Miracle Morning every day so that I can become the person I need to be to create "
+        "I am committed to doing my affirmations every day so that I can become the person I need to be to create "
         "everything I want for my life.",
         "I don't judge or condemn others, because I simply have no way of knowing that if I had lived their life, "
         "I might be, say and do exactly the same",
@@ -176,7 +177,8 @@ def get_affirmations():
         "You are mentally strong",
         "I am prepared to win",
         "I am focused on success",
-        "I am successful"
+        "I am successful",
+        "I am unstoppable",
 
 
     ]
@@ -209,7 +211,9 @@ def main():
         font = formatted_result["font"]
 
         logging.info("Updating...")
+        now = datetime.datetime.now()
         draw.text((padding, offset_y), quote, fill=0, align="left", spacing=line_spacing, font=font)
+        draw.text((padding, offset_y + 10), now.strftime('%Y-%m-%d %H:%M') )
         epd.display(epd.getbuffer(view))
 
         logging.info("Standby...")
