@@ -179,6 +179,7 @@ def get_affirmations():
         "I am focused on success",
         "I am successful",
         "I am unstoppable",
+        "There's always a way when I am committed"
 
 
     ]
