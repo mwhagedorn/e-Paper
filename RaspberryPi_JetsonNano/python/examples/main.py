@@ -9,7 +9,6 @@ if os.path.exists(libdir):
     sys.path.append(libdir)
 
 import logging
-from waveshare_epd import epd4in2 as epd_driver
 import time
 from PIL import Image, ImageDraw, ImageFont
 import traceback
@@ -19,6 +18,12 @@ import random
 from functools import reduce
 import re
 import datetime
+
+WIDTH  = 400
+HEIGHT = 300
+USE_EINK_DISPLAY = True
+if USE_EINK_DISPLAY:
+    from waveshare_epd import epd4in2 as epd_driver
 
 # Log to output file to see what's going on
 logging.basicConfig(level=logging.INFO,
@@ -189,6 +194,9 @@ def main():
         now = datetime.datetime.now()
         logging.info(f"\n{now.strftime('%Y-%m-%d %H:%M:%S')}")
         logging.info(f"Waking up...")
+
+        # conditionalize this
+        #4in2 is 400w x 300h
         epd = epd_driver.EPD()
         epd.init()
 
@@ -200,7 +208,7 @@ def main():
         line_spacing = 1
         padding = 30
 
-        view = Image.new('1', (epd.width, epd.height), 255)  # 255: clear the frame
+        view = Image.new('1', (WIDTH, HEIGHT), 255)  # 255: clear the frame
         draw = ImageDraw.Draw(view)
         logging.info(f"CLS")
         formatted_result = make_it_pretty(result, line_spacing, screen_height, screen_width, padding)
@@ -211,6 +219,7 @@ def main():
 
         logging.info("Updating...")
         now = datetime.datetime.now()
+
         draw.text((padding, offset_y), quote, fill=0, align="left", spacing=line_spacing, font=font)
         epd.display(epd.getbuffer(view))
 
