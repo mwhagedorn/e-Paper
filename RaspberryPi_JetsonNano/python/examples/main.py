@@ -57,7 +57,7 @@ def slice_index(x):
 
 def upperfirst(x):
     i = slice_index(x)
-    return
+    return x[:i].upper() + x[i:]
 
 
 
