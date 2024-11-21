@@ -166,7 +166,7 @@ def get_affirmations():
         "I have the ability to be at peace, even when life is difficult or painful.",
         "Anything another person has overcome or accomplished is evidence of what's possible for me.",
         "I am committed to maintaining unwavering faith that I will reach my goal and putting forth extraordinary"
-        "effort until I do, no matter what.\nThere is no other option.",
+        " effort until I do, no matter what.\nThere is no other option.",
         "I will accomplish everything that needs to get done.",
         "I am going to make you so proud.",
         "Every day I am better than before.",
@@ -185,6 +185,7 @@ def get_affirmations():
         "I am successful",
         "I am unstoppable",
         "There's always a way when I am committed",
+        "In order to focus on the future you must set aside the past"
     ]
     return affirmations
 
