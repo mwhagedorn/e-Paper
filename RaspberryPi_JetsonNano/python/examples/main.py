@@ -21,27 +21,27 @@ import datetime
 
 WIDTH  = 400
 HEIGHT = 300
-USE_EINK_DISPLAY = True
+USE_EINK_DISPLAY = False
 if USE_EINK_DISPLAY:
     from waveshare_epd import epd4in2 as epd_driver
 
 # Log to output file to see what's going on
 logging.basicConfig(level=logging.INFO,
-                    filename='/home/mhagedorn/e-Paper/RaspberryPi_JetsonNano/python/examples/quotes.log')
+                    filename='quotes.log')
 
 
 # Splits a long text to smaller lines which can fit in a line with max_width.
 # Uses a Font object for more accurate calculations
 def text_wrap(text, font=None, max_width=None):
     lines = []
-    if font.getsize(text)[0] < max_width:
+    if font.getbbox(text)[2] < max_width:
         lines.append(text)
     else:
         words = text.split(' ')
         i = 0
         while i < len(words):
             line = ''
-            while i < len(words) and font.getsize(line + words[i])[0] <= max_width:
+            while i < len(words) and font.getbbox(line + words[i])[2] <= max_width:
                 line = line + words[i] + " "
                 i += 1
             if not line:
@@ -77,7 +77,7 @@ def make_it_pretty(quotes, spacing, screen_height, screen_width, padding):
         logging.info(f"Quote try {attempt}")
         for size in font_sizes:
             font = ImageFont.truetype(os.path.join(picdir, 'FontsFree-Net-Bookerly.ttf'), size)
-            line_height = font.getsize('hg')[1] + spacing
+            line_height = font.getbbox('hg')[3] - font.getbbox('hg')[1] + spacing
             max_lines = (screen_height // line_height)
             split_quote = text.split("\n")
             result = [text_wrap(part, font=font, max_width=screen_width - (padding * 2)) for part in split_quote]
@@ -221,6 +221,10 @@ def main():
 
 
         draw.text((padding, offset_y), quote, fill=0, align="left", spacing=line_spacing, font=font)
+        date_font = ImageFont.truetype(os.path.join(picdir, 'FontsFree-Net-Bookerly.ttf'), 10)
+
+        draw.text((padding, offset_y-10), now.strftime("%Y-%m-%d %H:%M"), fill=0, align="left", spacing=line_spacing, font=date_font)
+
         if USE_EINK_DISPLAY:
             epd = epd_driver.EPD()
             epd.init()
