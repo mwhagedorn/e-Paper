@@ -234,7 +234,7 @@ def main():
         else:
             view.save("INK_EXPORT.bmp")
             final_image = Image.open("INK_EXPORT.bmp")
-            final_image = Image.open("INK_EXPORT.bmp")
+            final_image.show()
 
         logging.info("Standby...")
 
