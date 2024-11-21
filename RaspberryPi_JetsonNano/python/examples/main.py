@@ -21,7 +21,7 @@ import datetime
 
 WIDTH  = 400
 HEIGHT = 300
-USE_EINK_DISPLAY = False
+USE_EINK_DISPLAY = True
 if USE_EINK_DISPLAY:
     from waveshare_epd import epd4in2 as epd_driver
 
