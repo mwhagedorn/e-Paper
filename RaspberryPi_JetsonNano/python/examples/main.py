@@ -214,7 +214,6 @@ def main():
         logging.info("Updating...")
         now = datetime.datetime.now()
         draw.text((padding, offset_y), quote, fill=0, align="left", spacing=line_spacing, font=font)
-        draw.text((padding, offset_y + 10), now.strftime('%Y-%m-%d %H:%M') )
         epd.display(epd.getbuffer(view))
 
         logging.info("Standby...")
