@@ -197,21 +197,19 @@ def main():
 
         # conditionalize this
         #4in2 is 400w x 300h
-        epd = epd_driver.EPD()
-        epd.init()
+
 
         logging.info(picdir)
         result = get_affirmations()
 
-        screen_width = epd.width
-        screen_height = epd.height
         line_spacing = 1
         padding = 30
 
         view = Image.new('1', (WIDTH, HEIGHT), 255)  # 255: clear the frame
         draw = ImageDraw.Draw(view)
+
         logging.info(f"CLS")
-        formatted_result = make_it_pretty(result, line_spacing, screen_height, screen_width, padding)
+        formatted_result = make_it_pretty(result, line_spacing, HEIGHT, WIDTH, padding)
 
         quote = formatted_result["quote"]
         offset_y = formatted_result["offset"]
@@ -220,11 +218,21 @@ def main():
         logging.info("Updating...")
         now = datetime.datetime.now()
 
+
+
         draw.text((padding, offset_y), quote, fill=0, align="left", spacing=line_spacing, font=font)
-        epd.display(epd.getbuffer(view))
+        if USE_EINK_DISPLAY:
+            epd = epd_driver.EPD()
+            epd.init()
+            epd.display(epd.getbuffer(view))
+            epd.sleep()
+        else:
+            view.save("INK_EXPORT.bmp")
+            final_image = Image.open("INK_EXPORT.bmp")
+            final_image = Image.open("INK_EXPORT.bmp")
 
         logging.info("Standby...")
-        epd.sleep()
+
 
     except IOError as e:
         logging.info(e)
@@ -233,7 +241,8 @@ def main():
 
     except KeyboardInterrupt:
         logging.info("ctrl + c:")
-        epd.epdconfig.module_exit()
+        if USE_EINK_DISPLAY:
+            epd.epdconfig.module_exit()
         exit()
 
 
