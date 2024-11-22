@@ -11,15 +11,13 @@ if os.path.exists(libdir):
 import logging
 import time
 from PIL import Image, ImageDraw, ImageFont
-import traceback
-import textwrap
-import pdb
 import random
 from functools import reduce
 import re
 import datetime
+from typing import Tuple
 
-WIDTH  = 400
+WIDTH = 400
 HEIGHT = 300
 USE_EINK_DISPLAY = True
 if USE_EINK_DISPLAY:
@@ -63,7 +61,6 @@ def slice_index(x):
 def upperfirst(x):
     i = slice_index(x)
     return x[:i].upper() + x[i:]
-
 
 
 # Calculates font-size, line-wrapping, vertical centering, # of lines, strips not-needed parts AND does your dishes
@@ -117,6 +114,29 @@ def resize(image, width, height):
     background.paste(image_resize, offset)
     return background.convert('RGB')
 
+
+def draw_desktop(ink_image: Image, filename: str):
+    desktop_image = Image.open(os.path.join(picdir, filename))
+    ink_image.paste(desktop_image, (1, 1))
+
+def draw_trash(ink_image: Image, is_full: bool):
+    if is_full:
+        draw_image_plus_mask(ink_image, "trash_full.bmp", "trash_full_mask.bmp", (377, 270))
+    else:
+        draw_image_plus_mask(ink_image, "trash.bmp", "trash_mask.bmp", (377, 270))
+
+
+# Draw the startup disk icon (either black or white).
+def draw_startup_disk(ink_image: Image, is_black: bool):
+    if is_black:
+        draw_image_plus_mask(ink_image, "systemsix_disk_black.bmp", "systemsix_disk_mask.bmp", (365, 26))
+    else:
+        draw_image_plus_mask(ink_image, "systemsix_disk_white.bmp", "systemsix_disk_mask.bmp", (365, 26))
+
+def draw_image_plus_mask(ink_image: Image, image_name: str, mask_name: str, origin: Tuple[int, ...]):
+    image = Image.open(os.path.join(picdir, image_name))
+    mask = Image.open(os.path.join(picdir, mask_name)).convert("L")
+    ink_image.paste(image, origin, mask)
 
 def get_affirmations():
     logging.info("Fetching affirmations..")
@@ -199,14 +219,13 @@ def main():
         # conditionalize this
         #4in2 is 400w x 300h
 
-
         logging.info(picdir)
         result = get_affirmations()
 
         line_spacing = 1
         padding = 30
 
-        view = Image.new('1', (WIDTH, HEIGHT), 255)  # 255: clear the frame
+        view = Image.new(mode="RGBA", size=(WIDTH, HEIGHT), color='white')  # 255: clear the frame
         draw = ImageDraw.Draw(view)
 
         logging.info(f"CLS")
@@ -219,12 +238,14 @@ def main():
         logging.info("Updating...")
         now = datetime.datetime.now()
 
-
-
+        draw_desktop(view, "desktop_plain.bmp")
+        draw_trash(view, is_full=False)
+        draw_startup_disk(view, is_black=False)
         draw.text((padding, offset_y), quote, fill=0, align="left", spacing=line_spacing, font=font)
         date_font = ImageFont.truetype(os.path.join(picdir, 'FontsFree-Net-Bookerly.ttf'), 10)
 
-        draw.text((padding, offset_y-10), now.strftime("%Y-%m-%d %H:%M"), fill=0, align="left", spacing=line_spacing, font=date_font)
+        draw.text((padding, offset_y - 10), now.strftime("%Y-%m-%d %H:%M"), fill=0, align="left", spacing=line_spacing,
+                  font=date_font)
 
         if USE_EINK_DISPLAY:
             epd = epd_driver.EPD()
