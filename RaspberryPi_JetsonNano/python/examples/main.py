@@ -205,7 +205,15 @@ def get_affirmations():
         "I am successful",
         "I am unstoppable",
         "There's always a way when I am committed",
-        "In order to focus on the future you must set aside the past"
+        "In order to focus on the future you must set aside the past",
+        "Everything always works out for you",
+        "You can always find what you look for (pos or neg)",
+        "I am being made new day by day",
+        "I dont face anything alone",
+        "I am not who I used to be",
+        "I can let go of what I can't control"
+
+
     ]
     return affirmations
 
