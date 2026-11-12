@@ -1,9 +1,20 @@
-# ... existing code ...
+import datetime
+import logging
+import random
+import sys
+import time
+from pathlib import Path
 
-BACKGROUND_COLOR = "white"
+BASE_DIR = Path(__file__).resolve().parent
+PIC_DIR = BASE_DIR / "pic"
+LIB_DIR = BASE_DIR / "lib"
+LOG_FILE = BASE_DIR / "quotes.log"
+
+BACKGROUND_COLOR = 255
 TEXT_COLOR = 0
 FONT_SIZE = 24
-TEXT_POSITION = (30, 120)
+LINE_SPACING = 4
+PADDING = 30
 WIDTH = 400
 HEIGHT = 300
 
@@ -26,12 +37,31 @@ def initialize_display():
     return epd
 
 
+def wrap_text(text: str, font: ImageFont.FreeTypeFont, max_width: int) -> list[str]:
+    lines = []
+    line = ""
+    for word in text.split():
+        candidate = f"{line} {word}".strip()
+        if line and font.getlength(candidate) > max_width:
+            lines.append(line)
+            line = word
+        else:
+            line = candidate
+    if line:
+        lines.append(line)
+    return lines
+
+
 def create_break_image(text: str) -> Image.Image:
     font = ImageFont.truetype(str(PIC_DIR / "FontsFree-Net-Bookerly.ttf"), FONT_SIZE)
 
-    image = Image.new(mode="RGBA", size=(WIDTH, HEIGHT), color=BACKGROUND_COLOR)
+    image = Image.new(mode="1", size=(WIDTH, HEIGHT), color=BACKGROUND_COLOR)
     draw = ImageDraw.Draw(image)
-    draw.text(TEXT_POSITION, text, font=font, fill=TEXT_COLOR)
+
+    wrapped = "\n".join(wrap_text(text, font, WIDTH - 2 * PADDING))
+    _, top, _, bottom = draw.multiline_textbbox((0, 0), wrapped, font=font, spacing=LINE_SPACING)
+    offset_y = (HEIGHT - (bottom - top)) // 2 - top
+    draw.multiline_text((PADDING, offset_y), wrapped, font=font, fill=TEXT_COLOR, spacing=LINE_SPACING)
 
     return image
 
