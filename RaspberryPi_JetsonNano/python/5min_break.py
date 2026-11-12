@@ -67,6 +67,8 @@ def main() -> None:
 
         logging.info("CLS")
         epd.display(epd.getbuffer(image))
+        epd.lut_GC()
+        epd.refresh()
 
         logging.info("Standby...")
         epd.sleep()
