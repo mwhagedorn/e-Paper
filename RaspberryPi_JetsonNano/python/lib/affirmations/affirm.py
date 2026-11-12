@@ -27,8 +27,8 @@ def get_affirmations():
         "to be, from this moment on.",
         "If I want to upgrade my circle of influence, it begins with upgrading myself.",
         "I am destined to be whatever I choose to be.",
-        "I make bold moves toward my dreams each day, refuse to give up, and know that nothing can stop me."
-        "What I am capable of is determined by my potential, not my past."
+        "I make bold moves toward my dreams each day, refuse to give up, and know that nothing can stop me.",
+        "What I am capable of is determined by my potential, not my past.",
         "Say it over and over until I believe it.  Then I will become it",
         "Every day I can be stressed out or blissed out.  The choice is mine",
         "There is nothing to fear because I cannot fail.  I can only learn, grow and become better than I've ever "
