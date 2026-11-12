@@ -21,7 +21,7 @@ DISPLAY_DATA = 0x17
 if LIB_DIR.exists():
     sys.path.append(str(LIB_DIR))
 
-import breaks
+from breaks.five_min_break import get_breaks
 from PIL import Image, ImageDraw, ImageFont
 from waveshare_epd import epd3in52 as epd_driver
 
@@ -62,7 +62,7 @@ def main() -> None:
 
         epd = initialize_display()
 
-        text = random.choice(breaks.get_breaks())
+        text = random.choice(get_breaks())
         image = create_break_image(epd, text)
 
         logging.info("CLS")
