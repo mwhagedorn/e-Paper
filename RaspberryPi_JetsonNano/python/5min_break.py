@@ -9,7 +9,7 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent
 PIC_DIR = BASE_DIR / "pic"
 LIB_DIR = BASE_DIR / "lib"
-LOG_FILE = Path("/home/mwhagedorn/e-Paper/RaspberryPi_JetsonNano/python/quotes.log")
+LOG_FILE = Path("/home/mhagedorn/e-Paper/RaspberryPi_JetsonNano/python/quotes.log")
 
 BACKGROUND_COLOR = 255
 TEXT_COLOR = 0
